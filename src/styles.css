@@ -53,6 +53,9 @@ body{
     padding-left:15px ;
     padding-right: 15px;
 }
+.signupBtn:hover{
+    background-color: whitesmoke;
+}
 
 .signupBtn img{
     padding:2px;

@@ -9,7 +9,8 @@ const Form=()=>{
     let [user,setUser]=useState({name:'', email:'', password:'', confirmPassword:''})
     let [success,setSuccessMsg]=useState("");
     let [error,setErrorMsg]=useState("");
-    console.log(window.innerHeight, window.innerWidth)
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
 
 
@@ -23,6 +24,22 @@ const Form=()=>{
         setErrorMsg('');
         return setSuccessMsg('Successfully Created!')
     }
+   
+
+    const handleMouseDown = () => {
+        setShowPassword(true);
+    };
+
+    const handleMouseUp = () => {
+        setShowPassword(false);
+    };
+    const handleMouseDownC = () => {
+        setShowConfirmPassword(true);
+    };
+
+    const handleMouseUpC = () => {
+        setShowConfirmPassword(false);
+    };
 
     return(
         <div className="form">
@@ -40,12 +57,18 @@ const Form=()=>{
                     <input type="email" placeholder="Email Address" value={user.email} required onChange={(event)=>setUser({...user, email:event.target.value})}/>
                </div>
                <div class="input">
-                    <input type="password" placeholder="Password" value={user.password} required onChange={(event)=>setUser({...user, password:event.target.value})}/>
-                    <img src={Vector} alt=''/>
+                    <input type={showPassword ? 'text' : 'password'} placeholder="Password" value={user.password} required onChange={(event)=>setUser({...user, password:event.target.value})}/>
+                    <img src={Vector} alt=''
+                    onMouseDown={handleMouseDown}
+                    onMouseUp={handleMouseUp}
+                    onMouseLeave={handleMouseUp}/>
                </div>
                <div class="input">
-                    <input type="password" placeholder="Confirm Password" value={user.confirmPassword} required onChange={(event)=>setUser({...user, confirmPassword:event.target.value})}/>
-                    <img src={Vector} alt=""/>
+                    <input type={showConfirmPassword ? 'text' : 'password'} placeholder="Confirm Password" value={user.confirmPassword} required onChange={(event)=>setUser({...user, confirmPassword:event.target.value})}/>
+                    <img src={Vector} alt=""
+                    onMouseDown={handleMouseDownC}
+                    onMouseUp={handleMouseUpC}
+                    onMouseLeave={handleMouseUpC}/>
                </div>
                <CreateAccountBtn />
             </form>
